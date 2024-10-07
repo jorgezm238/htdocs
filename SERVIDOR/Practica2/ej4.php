@@ -20,7 +20,7 @@ $num = array();
     
 echo "Diagonal principal: ";
 for ($i = 0; $i < 4; $i++) {
-    echo $num[$i][$i] . " "; 
+    echo $num[$i][$i] . " ";
 }
 echo "\n";
 

@@ -23,11 +23,11 @@ sqrt(b2-4ac))/(2a) */
       } else {
         echo "No hay solución";
       }
-    } else { //b no es 0
+    } else { 
       $sol=-$c/$b;
       echo "Hay una solución igual a $sol";
     }
-  } else { //a no es 0
+  } else { 
     if ($disc==0) {
       $sol=-$b/(2*$a);
       echo "Hay una solución igual a $sol";
