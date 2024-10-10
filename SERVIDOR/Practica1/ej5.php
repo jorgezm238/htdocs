@@ -6,10 +6,11 @@ misma La solución de la ecuación de segundo grado depende del signo de b2-4ac:
 - si es nulo, hay sólo una solución -b/2a
 - si es positivo, hay dos soluciones: (-b+sqrt(b2-4ac))/(2a) y (-b-
 sqrt(b2-4ac))/(2a) */
-  $a=4;
-  $b=-4;
-  $c=-7;
+  $a=7;
+  $b=-2;
+  $c=-4;
   $ec=$a."x^2+(".$b.")*x+(".$c.")=0";
+  
   echo "Ecuación a resolver: $ec<br>";
   $disc=$b**2-4*$a*$c;
   if ($disc<0) {

@@ -6,8 +6,10 @@ divisible por 1 y por sí mismo */
   for ($num=2; $num<=50; $num++) {
 	$primo=true;
     for ($i=2; $i<=$num/2; $i++) {
-      if ($num % $i == 0) $primo=false;
+      if ($num % $i == 0) 
+      $primo=false;
     }
-    if ($primo==true) echo "$num<br>";
+    if ($primo==true)
+     echo "$num<br>";
   }
 ?>
