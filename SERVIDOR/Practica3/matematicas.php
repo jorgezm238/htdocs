@@ -30,7 +30,7 @@ function ecuacion ($a, $b, $c){
         return $resultado;
     }
 
-    function isset($variable1){
+    function isset($variable1){//revisar en casa 
     if (isset($variable1)) {
         return true;
     } else {

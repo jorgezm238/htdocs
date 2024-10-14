@@ -2,6 +2,7 @@
 /*Escribe un script para probar algunas de las funciones mostradas debajo, el sript
 ha de contener al menos tres funciones de cada bloque
 Funciones de variables*/
+include 'matematicas.php';
 
 $variable1 = "Hola mundo";
 if ($variable1==true) {
