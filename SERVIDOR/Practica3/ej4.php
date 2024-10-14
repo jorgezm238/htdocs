@@ -1,0 +1,17 @@
+<?php
+
+/*Escribe una función que reciba un array de números, y un número, el límite. La
+función tiene que devolver un nuevo array que contenga solo los elementos del
+array original menores que el límite.*/
+
+include 'matematicas.php';
+    $numeros = [10, 15, 3, 7, 22, 5];
+    $limite = 10;
+    
+    $resultado = ej4($numero    s, $limite);
+    echo "Las soluciones son: " . implode(", ", $resultado) . "\n";
+    echo "<br>";
+    var_dump($resultado);
+    
+    
+?>
