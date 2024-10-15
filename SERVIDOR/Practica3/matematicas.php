@@ -30,29 +30,5 @@ function ecuacion ($a, $b, $c){
         return $resultado;
     }
 
-    function isset($variable1){//revisar en casa 
-    if (isset($variable1)) {
-        return true;
-    } else {
-        return false;
-    }
-    }
-    function empty($variable2){
-        if (empty($variable2)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    function null($variable3){
-        if (is_null($variable3)) {
-            return true;
-        } else {
-            return false;
-        }
-
-
-    }
 
 ?>
