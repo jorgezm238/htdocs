@@ -52,7 +52,7 @@ echo "<br>";
 
 // strlen() 
 echo "\nstrlen() Test:\n";
-echo "Longitud de var1: " . strlen($var1) . "\n";
+echo "Longitud de var1: " . strlen($var1) .     "\n";
 echo "<br>";
 
 // explode() 
