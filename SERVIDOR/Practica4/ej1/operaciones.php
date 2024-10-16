@@ -1,10 +1,10 @@
 <?php
 
-class operaciones{
+class Operaciones{
 
     public $num1;
     public $num2;
-    protected $num1;
+    
 
     public function __construct($num1,$num2)
     {
@@ -53,6 +53,26 @@ class operaciones{
         $this->num2 = $num2;
 
         return $this;
+    }
+    public function suma(){
+        $suma= $this->num1+$this->num2;
+        return $suma;
+    }
+    public function resta(){
+        $resta= $this->num1-$this->num2;
+        return $resta;
+    }
+    public function mult(){
+        $mult= $this->num1*$this->num2;
+        return $mult;
+    }
+    public function div(){
+        $div= $this->num1/$this->num2;
+        return $div;
+    }
+    public function __toString(){
+        return  ("num 1: $this->num1, num 2: $this->num2");
+
     }
 }
 ?>
