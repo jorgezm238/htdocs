@@ -1,9 +1,7 @@
 <?php
-class Vehiculo{
-
+class Vehiculo {
     public $color;
     public $peso;
-    
 
     public function __construct($color,$peso)
     {
@@ -11,8 +9,13 @@ class Vehiculo{
         $this->peso = $peso;
     }
 
-    
-
+    public function circula() {
+        echo "El vehículo circula</br>";
+    }
+    function añadir_persona($peso_persona) {
+        $this->peso+=$peso_persona;
+        echo"Se sube una persona</br>";
+    }
 
     /**
      * Get the value of color
@@ -53,21 +56,8 @@ class Vehiculo{
 
         return $this;
     }
-
-
-    public function circula(){
-
-
-    }
-
-    public function añadir_persona($peso_persona){
-
-
+    public function __toString() {
+        return "Color " . $this->color . " Peso: " . $this->peso . " kg.</br>";
     }
 }
-
-
-
-
-
 ?>
