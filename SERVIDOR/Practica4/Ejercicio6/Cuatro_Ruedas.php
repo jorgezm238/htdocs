@@ -32,6 +32,6 @@ include_once 'Vehiculo.php';
         {
             $this->peso=$this->getPeso()+$peso_persona;
         }
-
+    }
       
 ?>
