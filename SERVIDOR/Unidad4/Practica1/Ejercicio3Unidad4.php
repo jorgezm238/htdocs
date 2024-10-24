@@ -48,7 +48,9 @@
                 <input type='submit' name='multiplicacion' value='Multiplicación'>
                 <input type='submit' name='division' value='División'>
                 </form>";
-                } else {
+                } 
+                else 
+                {
                 echo "<h2>Formulario</h2>";
                 echo "<form action='Ejercicio3Unidad4.php' method='post'>
                 <label for='nombre'>A:</label><br>
