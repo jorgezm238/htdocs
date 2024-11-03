@@ -1,15 +1,18 @@
 <?php
-if  (isset($POST['name'])){
-    $name = $POST['name']; 
-}
-else {
+if  (isset($_POST['name']))
+    $name = $_POST['name']; 
+
+else 
     $name = "(Not entered)";
-}
+
 echo<<<_END
+
 <html>
+<head>
 <title>
 Mi primer formularoiop
 </title>
+</head>
 <body>
 Tu nombre es: $name<br>
 <form method="post" action="formtest2.php"> 
