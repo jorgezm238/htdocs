@@ -12,7 +12,7 @@ if ($n1 > $n2) {
      $result = $n1 - $n2;
     echo "El resultado de la resta es: " . $result;
     } 
-
+//a
  if($n1<$n2) {
      $result = $n1 + $n2;
     echo "El resultado de la suma es: " . $result;
