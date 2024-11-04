@@ -5,5 +5,5 @@ $suma = $num1 + $num2;
 
 echo "La suma de ".$num1." + ".$num2. " = ".$suma;
 
-//a
+
 ?>
