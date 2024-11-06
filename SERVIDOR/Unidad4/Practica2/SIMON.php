@@ -8,26 +8,43 @@
         .circulo {
             width: 100px;             /* Ancho del círculo */
             height: 100px;            /* Alto del círculo */
-            background-color: blue; /* Color de fondo dinámico */
+            background-color: <?php echo $color;?>; /* Color de fondo dinámico */
             border-radius: 50%;       /* Convierte el cuadrado en círculo */
             
         }
-        .boton {
-            background-color: green; /* Color de fondo dinámico */
-            color: white;               /* Color del texto */
-            border: none;              /* Sin borde */
-            padding: 10px 20px;        /* Espaciado interno */
-            font-size: 16px;           /* Tamaño del texto */
-            border-radius: 5px;        /* Bordes redondeados */
-            cursor: pointer;           /* Cambia el cursor a una mano */
-            transition: background-color 0.3s; /* Transición para el efecto hover */
-        }
-        .boton:hover {
-            background-color: #2980b9; /* Color en hover */
-        }
+
+
     </style>
 </head>
 <body>
+<div>
+
+<form action="pregunta.php" method="post">
+<input type="hidden" name ="color" values="<?php echo $color;?>">
+<input type="submit" value="jugar" name= "Submit">
+
+</form>
+
+</div>
+<?php
+switch ($ncolor) {
+    case 0:
+       $color ="red";
+        break;
+    case 1:
+       $color ="yellow";
+        break;
+    case 2:
+       $color ="blue";
+        break;
+    case 3:
+       $color ="green";
+        break;
+}
+
+
+
+?>
     <div class="circulo"></div>
     <button class="boton">TextoBoton</button>
 
