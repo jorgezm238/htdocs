@@ -1,10 +1,10 @@
 <?php
-sesion_start()
+session_start();
 if ($_SESSION["color"] == $_POST["resColor"]) {
-    echo '<a href= "SIMON.php>Acertaste, nueva ronda"'
+    echo '<a href= "SIMON.php>Acertaste, nueva ronda">';
 }
 else {
-       echo '<a href= "SIMON.php>Fallaste, nueva ronda"'
+       echo '<a href= "SIMON.php>Fallaste, nueva ronda">';
 }
 
 ?>
