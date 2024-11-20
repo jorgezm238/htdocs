@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body style="background-color: <?= $color ?>;">
     <form method="post">
-        <p>Seleccione de qué color desea que sea la web de ahora en adelante:</p>
+        <p><strong>Seleccione de qué color desea que sea la web de ahora en adelante:</strong></p>
         <input type="radio" name="color" value="red" id="rojo" <?= $color == "Rojo" ? "checked" : "" ?>>
         <label for="rojo">Rojo</label><br>
         <input type="radio" name="color" value="green" id="verde" <?= $color == "Verde" ? "checked" : "" ?>>
