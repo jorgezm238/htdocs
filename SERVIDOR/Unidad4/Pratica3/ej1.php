@@ -21,11 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body style="background-color: <?= $color ?>;">
     <form method="post">
         <p>Seleccione de qué color desea que sea la web de ahora en adelante:</p>
-        <input type="radio" name="color" value="red" id="rojo" <?= $color == "red" ? "checked" : "" ?>>
+        <input type="radio" name="color" value="red" id="rojo" <?= $color == "Rojo" ? "checked" : "" ?>>
         <label for="rojo">Rojo</label><br>
-        <input type="radio" name="color" value="green" id="verde" <?= $color == "green" ? "checked" : "" ?>>
+        <input type="radio" name="color" value="green" id="verde" <?= $color == "Verde" ? "checked" : "" ?>>
         <label for="verde">Verde</label><br>
-        <input type="radio" name="color" value="blue" id="azul" <?= $color == "blue" ? "checked" : "" ?>>
+        <input type="radio" name="color" value="blue" id="azul" <?= $color == "Azul" ? "checked" : "" ?>>
         <label for="azul">Azul</label><br><br>
         <button type="submit">Crear cookie</button>
     </form>
