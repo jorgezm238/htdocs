@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
         <br>
         <label>Plan:</label>
         <input type="radio" name="plan" value="Estandar" required> Estandar
-        <input type="radio" name="plan" value="Premium" required> Premium
+        <input type="radio" name="plan" value="Premiun" required> Premium
         <br>
         <button type="submit" name="submit">Registrar</button>
     </form>
