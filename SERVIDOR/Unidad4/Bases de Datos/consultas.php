@@ -10,12 +10,12 @@
  if (!$result) die("Fatal Error");
  $row = $result->num_rows; 
 
-// Recorrer los resultados
+
 for ($j = 0; $j < $row; ++$j) {
     $result->data_seek($j); 
     $row = $result->fetch_assoc(); 
 
-    // Mostrar los datos
+
     echo 'Usuario: ' . htmlspecialchars($row['usu']) . '<br>';
     echo 'Contraseña: ' . htmlspecialchars($row['contra']) . '<br><br>';
 }
