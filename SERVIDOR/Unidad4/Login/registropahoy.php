@@ -30,17 +30,17 @@ if (isset($_POST['submit'])) {
     <form action="registropahoy.php" method="post">
         <label>Usuario:</label>
         <input type="text" name="usuario" required>
-        <br>
+        <br></br>
         <label>Contraseña:</label>
         <input type="password" name="contrasenia" required>
-        <br>
+        <br></br>
         <label>Confirmar contraseña:</label>
         <input type="password" name="contraseniaC" required>
-        <br>
+        <br></br>
         <label>Plan:</label>
         <input type="radio" name="plan" value="Estandar" required> Estandar
         <input type="radio" name="plan" value="Premiun" required> Premium
-        <br>
+        <br></br>
         <button type="submit" name="submit">Registrar</button>
     </form>
 </body>

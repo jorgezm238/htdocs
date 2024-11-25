@@ -6,6 +6,7 @@
     <title>Sesiones</title>
 </head>
 <body>
+    <h1>Inicia sesión</h1>
     <?php
 session_start();
 if (isset($_POST['entrar'])) {
@@ -29,12 +30,12 @@ if (isset($_POST['entrar'])) {
 <form action ="login.php" method ="post">
 <label>Usuario</label>
 <input type="text" name="usuario">
-<br>
+<br></br>
 <label>Contraseña</label>
 <input type="password" name="contrasenia">
-<br>
+<br></br>
 <a href="registropahoy.php">REGISTRARSE</a>
-<br>
+<br></br>
 <button type="submit" name='entrar'>Entrar</button>
 
 </form>
