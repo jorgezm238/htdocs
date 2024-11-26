@@ -8,10 +8,10 @@
  $query = "SELECT usu,contra FROM usuarios";
  $result = $conn->query($query);
  if (!$result) die("Fatal Error");
- $row = $result->num_rows; 
+ $rows = $result->num_rows; 
 
 
-for ($j = 0; $j < $row; ++$j) {
+for ($j = 0; $j < $rows; ++$j) {
     $result->data_seek($j); 
     $row = $result->fetch_assoc(); 
 
