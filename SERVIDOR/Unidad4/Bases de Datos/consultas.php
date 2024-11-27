@@ -5,7 +5,7 @@
 
 
 
- $query = "SELECT usu,contra FROM usuarios";
+ $query = "SELECT id,rol,usu,contra FROM usuarios";
  $result = $conn->query($query);
  if (!$result) die("Fatal Error");
  $rows = $result->num_rows; 
@@ -16,7 +16,12 @@ for ($j = 0; $j < $rows; ++$j) {
     $row = $result->fetch_assoc(); 
 
 
+
+
+    echo 'Id: ' . htmlspecialchars($row['id']).'<br>';
     echo 'Usuario: ' . htmlspecialchars($row['usu']) . '<br>';
-    echo 'Contraseña: ' . htmlspecialchars($row['contra']) . '<br><br>';
+    echo 'Contraseña: ' . htmlspecialchars($row['contra']) . '<br>';
+    echo 'Rol: ' . htmlspecialchars($row['rol']) . '<br><br>';
+    
 }
 ?> 
