@@ -18,10 +18,10 @@ for ($j = 0; $j < $rows; ++$j) {
 
 
 
-    echo 'Id: ' . htmlspecialchars($row['id']).'<br>';
-    echo 'Usuario: ' . htmlspecialchars($row['usu']) . '<br>';
-    echo 'Contraseña: ' . htmlspecialchars($row['contra']) . '<br>';
-    echo 'Rol: ' . htmlspecialchars($row['rol']) . '<br><br>';
+    echo '<strong>Id: </strong>' . htmlspecialchars($row['id']).'<br>';
+    echo '<strong>Usuario: </strong>' . htmlspecialchars($row['usu']) . '<br>';
+    echo '<strong>Contraseña: </strong>' . htmlspecialchars($row['contra']) . '<br>';
+    echo '<strong>Rol: </strong>' . htmlspecialchars($row['rol']) . '<br><br>';
     
 }
 ?> 
