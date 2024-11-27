@@ -13,7 +13,7 @@
 
 for ($j = 0; $j < $rows; ++$j) {
     $result->data_seek($j); 
-    $row = $result->fetch_assoc(); 
+    $row = $result->fetch_assoc(); //usar una variable distinta a la del bucle
 
 
 
