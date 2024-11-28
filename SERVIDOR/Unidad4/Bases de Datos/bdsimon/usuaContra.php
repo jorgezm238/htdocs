@@ -10,7 +10,7 @@
      require_once 'login.php';
      $conn = new mysqli($hn, $un, $pw, $db);
      if ($conn->connect_error) die("Fatal Error");
-    
+     if (isset($_POST['submit'])) {
     if (!empty($_POST['usu'])&& !empty($_POST['contra'])) {
         $input_usu = $_POST['usu'];
         $input_contra = $_POST['contra'];
@@ -26,7 +26,9 @@
      echo '<br>';
      echo '<strong>Usuario: </strong>' . htmlspecialchars($rows['usu']) . '<br>';
      echo '<strong>Contraseña: </strong>' . htmlspecialchars($rows['contra']) . '<br>';
-     
+     echo '<br>';
+     echo '<a href="usuaContra.php">Volver</a>';
+     exit;
     }
     
     else {
@@ -34,20 +36,23 @@
         echo 'Fatal error.';
 
         }
-        
     }
-    exit;
+
+
+    
 
     
     $conn->close();
+}
+
 
     ?>
 <form action ="#" method ="post">
 <label>Usuario</label>
-<input type="text" name="usu">
+<input type="text" name="usu" required>
 <br>
 <label>Contraseña</label>
-<input type="password" name="contra">
+<input type="password" name="contra" required>
 <br>
 <a href="registro.php">REGISTRARSE</a>
 <br>
