@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+require_once 'login.php';
+$conn = new mysqli($hn, $un, $pw, $db);
+if ($conn->connect_error) die("Fatal Error");
 
 if (isset($_POST['submit'])) {
     if (!empty($_POST['usu']) && !empty($_POST['contra']) && !empty($_POST['contraC'])) {
@@ -8,29 +11,34 @@ if (isset($_POST['submit'])) {
             
             $_SESSION['usu'] = $_POST['usu'];
             $_SESSION['contra'] = $_POST['contra'];
-            $_SESSION['rol']=$_POST['rol']ç
+            $_SESSION['rol']=$_POST['rol'];
             //guardas las variables para que sea mas limpio
             $u=$_SESSION['usu'];
             $c=$_POST['contra'];
             $r=$_POST['rol'];
 
-            require_once 'login.php';
-            $conn = new mysqli($hn, $un, $pw, $db);
-            if ($conn->connect_error) die("Fatal Error");
 
             $query = "SELECT usu FROM usuarios WHERE usu = '$u'";
             $result = $conn->query($query);
+          //  $row=$result->fetch_row();
+            
             if ($result && ($result->num_rows >0)) {
-                echo'Usuario ya existente.'
+                echo'Usuario ya existente.';
             }
             else {
                 $query="INSERT INTO `usuarios`(`usu`, `contra`, `rol`) VALUES ('$u','$c','$r')";
+                $result = $conn->query($query);
+                echo'USUARIO REGISTRADO';
+                echo '<br>';
+                echo "Registro con exito. Ahora puedes <a href='usuaContra.php'>iniciar sesión</a>.";
+                
+                $conn->close();
                 exit;
             }
-           
-
-            echo "Registro con exito. Ahora puedes <a href='usuaContra.php'>iniciar sesión</a>.";
+            echo '<br>';
+            echo '<a href="registrobd.php">Volver</a>';
             exit;
+
         } else {
             echo "Las contraseñas no coinciden.";
         }
