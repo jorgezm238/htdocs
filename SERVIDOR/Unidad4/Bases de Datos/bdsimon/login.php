@@ -1,8 +1,8 @@
 
 <?php // login.php
  $hn = 'localhost';
- $un = 'root';
- $pw = '';
+ $un = 'Jugador';
+ $pw = 'jugador';
  $db = 'bdsimon';
  
  
