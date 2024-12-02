@@ -31,7 +31,7 @@
 </head>
 <body>
 <?php
- 
+ include 'pintar-circulos.php';
  session_start();
   require_once 'login.php';
   $conn = new mysqli($hn, $un, $pw, $db);
@@ -53,21 +53,10 @@
         echo '<br>';
     echo '<h1><strong>Hola </strong><strong>' .  htmlspecialchars($rows['nombre']) .'</strong> <strong>, memoriza la combinación</strong></h1>'. '<br>';
     echo '<br>';
-    
-    $colors = ['red', 'blue', 'green', 'yellow'];
+        //$colors = ['red', 'blue', 'green', 'yellow'];
+        echo pintar_circulos($colors = ['red', 'blue', 'green', 'yellow']);  
+    }   
 
-for ($i=0; $i <4 ; $i++) { 
-    // Selección aleatoria de un color
-    $randomColor[$i] = $colors[array_rand($colors)];
-?>
-    <div class="circle" style="background-color: <?php echo $randomColor[$i]; ?>;">
-        <?php echo ucfirst($randomColor[$i]); /*Primera letra en mayuscula*/?> 
-    </div>
-<?php 
-}
-    // Guardar el array en una variable de sesión
-    $_SESSION['colores_adivinar'] = $randomColor;
-    $_SESSION['colores'] = $colors;
     echo'<form action ="jugar.php" method ="post">
 <button type="submit" name="submit">Vamos a jugar</button>';
 exit;
@@ -82,7 +71,7 @@ exit;
 $conn->close();
 }
 }
- }
+ 
 
 
 
