@@ -18,9 +18,9 @@ if (isset($_POST['usu'])) {
         $_SESSION['cod'] = htmlspecialchars($result->fetch_assoc()['Codigo']);
         echo "LOGUEADO CORRECTAMENTE";
         $connection->close();
-        echo'
-            <meta http-equiv="refresh" content="0;URL='jugar.php'" />
-        '
+        echo<<<_END
+        <meta http-equiv="refresh" content="0;URL='jugar.php'" />
+    _END;
     } else {
         session_destroy();
         echo "<a href='index.php'>NO EXISTE EL USUARIO Y/O CONTRASEÑA, VUELVA A INTENTARLO</a>";
