@@ -1,19 +1,15 @@
 <?php
-function pintar_circulos(array $colors){
+    
+    function pintar_circulos($col1,$col2,$col3,$col4) {
+        echo'
+            <div class="circulo" style="background-color: $col1"></div>
+            <div class="circulo" style="background-color: $col2"></div>
+            <div class="circulo" style="background-color: $col3"></div>
+            <div class="circulo" style="background-color: $col4"></div>
+        '
+        $arr = [$col1,$col2,$col3,$col4];
+
+        return $arr;
         
-
-        for ($i=0; $i <4 ; $i++) { 
-            // Selección aleatoria de un color
-            $randomColor[$i] = $colors[array_rand($colors)];
-        ?>
-            <div class="circle" style="background-color: <?php echo $randomColor[$i]; ?>;">
-                <?php echo ucfirst($randomColor[$i]); /*Primera letra en mayuscula*/?> 
-            </div>
-        <?php 
-        }
-            // Guardar el array en una variable de sesión
-            $_SESSION['colores_adivinar'] = $randomColor;
-            $_SESSION['colores'] = $colors;
     }
-
-?>  
+?>

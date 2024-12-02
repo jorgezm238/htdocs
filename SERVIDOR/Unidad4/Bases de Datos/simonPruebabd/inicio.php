@@ -1,82 +1,54 @@
+<?php
+
+session_start();
+require_once 'login.php';
+if (isset($_POST['usu'])) {
+    $usu = $_POST['usu'];
+    $psw = $_POST['psw'];
+    $connection = new mysqli($hn, $un, $pw, $db);
+    if ($connection->connect_error) die("Fatal Error");
+    $query = "SELECT Codigo,Nombre,Clave FROM usuarios WHERE Nombre = '$usu' AND Clave = '$psw' ";
+    $result = $connection->query($query);
+    if (!$result) die("Fatal Error");
+    $rows = $result->num_rows;
+    if ($rows!=0) {
+        $_SESSION['usu'] = $_POST['usu'];
+        /* $_SESSION['psw'] = $_POST['psw']; */
+        $result->data_seek(0);
+        $_SESSION['cod'] = htmlspecialchars($result->fetch_assoc()['Codigo']);
+        echo "LOGUEADO CORRECTAMENTE";
+        $connection->close();
+        echo'
+            <meta http-equiv="refresh" content="0;URL='jugar.php'" />
+        '
+    } else {
+        session_destroy();
+        echo "<a href='index.php'>NO EXISTE EL USUARIO Y/O CONTRASEÑA, VUELVA A INTENTARLO</a>";
+    }
+
+}
+
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        /* Estilos para el círculo */
-        .circle {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: bold;
-            color: black;
-            text-align: center;
-            margin: 20px auto;
-        }
-        /* Estilos del botón */
-        .button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
 </head>
+
 <body>
-<?php
- include 'pintar-circulos.php';
- session_start();
-  require_once 'login.php';
-  $conn = new mysqli($hn, $un, $pw, $db);
-  if ($conn->connect_error) die("Fatal Error");
-  if (isset($_POST['submit'])) {
- if (!empty($_POST['usu'])&& !empty($_POST['contra'])) {
-     $_SESSION['usu'] = $_POST['usu'];
-     $_SESSION['contra'] = $_POST['contra'];
-     $input_usu = $_SESSION['usu'];
-     $input_contra = $_SESSION['contra'];   
-
-     $query = "SELECT nombre,clave FROM usuarios WHERE nombre='$input_usu' AND 
-    clave='$input_contra'";
-    $result = $conn->query($query);
-    if ($result && ($result->num_rows >0)) {
-    echo'<h1>SIMÓN</h1>';
-    $rows = $result->fetch_assoc(); 
-
-        echo '<br>';
-    echo '<h1><strong>Hola </strong><strong>' .  htmlspecialchars($rows['nombre']) .'</strong> <strong>, memoriza la combinación</strong></h1>'. '<br>';
-    echo '<br>';
-        //$colors = ['red', 'blue', 'green', 'yellow'];
-        echo pintar_circulos($colors = ['red', 'blue', 'green', 'yellow']);  
-    }   
-
-    echo'<form action ="jugar.php" method ="post">
-<button type="submit" name="submit">Vamos a jugar</button>';
-exit;
-}
-//SELECT codigo, usu group by
-else {
-
-    echo 'Fatal error.';
-    echo '<br>';
-    echo '<a href="usuaContra.php">Volver</a>';
-exit;
-$conn->close();
-}
-}
- 
-
-
-
-?> 
-
-</form>
+    <h1>VAMOS A JUGAR AL SIMÓN!!!!</h1>
+    <form action="#" method="post">
+        <label for="usu">Usuario: </label>
+        <input type="text" id="usu" name="usu" required><br>
+        <label for="usu">Contraseña: </label>
+        <input type="password" id="psw" name="psw" required><br>
+        <!-- <a href="registro.php">Registrese</a><br>  -->
+        <input type="submit" value="Entrar" name="submit">
+    </form>
 </body>
+
 </html>
