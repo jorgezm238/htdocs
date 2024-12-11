@@ -16,9 +16,9 @@
             $_SESSION['cod'] = htmlspecialchars($result->fetch_assoc()['Codigo']);
             echo "LOGUEADO CORRECTAMENTE";
             $connection->close();
-            echo<<<_END
-                <meta http-equiv="refresh" content="0;URL='inicio.php'" />
-            _END;
+            echo'
+                <meta http-equiv="refresh" content="0;URL="inicio.php" />
+            ';
         } else {
             session_destroy();
             echo "<a href='index.php'>NO EXISTE EL USUARIO Y/O CONTRASEÑA, VUELVA A INTENTARLO</a>";

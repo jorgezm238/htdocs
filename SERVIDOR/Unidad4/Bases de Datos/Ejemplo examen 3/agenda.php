@@ -18,12 +18,12 @@
                 echo "<fieldset style='border: 4px double; display:inline;'><p>CONTACTO$i</p>";
                 echo'
                     <label for="nombre'$i'">Nombre'$i' </label>
-                    <input type="text" id='nombre$i' name='nombre$i' required>
+                    <input type="text" id="nombre'$i'" name="nombre'$i'" required>
                     <br>
                     <label for="email'$i'">Email'$i' </label>
                     <input type="email" id="email'$i'" name="email'$i'" required>
                     <br>
-                    <label for="telefono'$i'>Telefono'$i' </label>
+                    <label for="telefono'$i'">Telefono'$i' </label>
                     <input type="tel" id="telefono'$i'" name="telefono'$i'"required></fieldset>
                 ';
             }
