@@ -1,0 +1,78 @@
+{
+    "estaciones": {
+      "estacion": [
+        {
+          "id": 1,
+          "título": "Constitución",
+          "direccion": "Avda. Constitución",
+          "poblacion": "Gijón",
+          "provincia": "Asturias",
+          "latitud": 43.529806,
+          "longitud": -5.673428
+        },
+        {
+          "id": 2,
+          "título": "Argentina",
+          "direccion": "Avda. Argentina",
+          "poblacion": "Gijón",
+          "provincia": "Asturias",
+          "latitud": 43.538869,
+          "longitud": -5.69893
+        },
+        {
+          "id": 3,
+          "título": "H. Felgueroso",
+          "direccion": "H. Felgueroso",
+          "poblacion": "Gijón",
+          "provincia": "Asturias",
+          "latitud": 43.535061,
+          "longitud": -5.658123
+        },
+        {
+          "id": 4,
+          "título": "Castilla",
+          "direccion": "Plaza Castilla",
+          "poblacion": "Gijón",
+          "provincia": "Asturias",
+          "latitud": 43.53794,
+          "longitud": -5.645951
+        },
+        {
+          "id": 10,
+          "título": "Montevil",
+          "direccion": "Montevil",
+          "poblacion": "Gijón",
+          "provincia": "Asturias",
+          "latitud": 43.517315,
+          "longitud": -5.672499
+        },
+        {
+          "id": 11,
+          "título": "Santa Bárbara",
+          "direccion": "Santa Bárbara",
+          "poblacion": "Gijón",
+          "provincia": "Asturias",
+          "latitud": 43.520957,
+          "longitud": -5.690707
+        },
+        {
+          "id": 18,
+          "título": "El Lauredal",
+          "direccion": "Lauredal",
+          "poblacion": "Gijon",
+          "provincia": "",
+          "latitud": "N/A",
+          "longitud": "N/A"
+        },
+        {
+          "id": 12,
+          "título": "Unidad Móvil (Veriña)",
+          "direccion": "Unidad Móvil",
+          "poblacion": "Gijón",
+          "provincia": "Asturias",
+          "latitud": "N/A",
+          "longitud": "N/A"
+        }
+      ]
+    }
+  }

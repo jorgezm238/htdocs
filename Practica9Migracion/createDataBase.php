@@ -11,7 +11,7 @@ try {
     if ($conexion->connect_error) {
         throw new Exception("Conexión fallida: " . $conexion->connect_error);
     }
-
+    
     // Crear la base de datos
     $sql_db = "CREATE DATABASE IF NOT EXISTS mi_base_de_datos_migracion";
     if ($conexion->query($sql_db) === TRUE) {
