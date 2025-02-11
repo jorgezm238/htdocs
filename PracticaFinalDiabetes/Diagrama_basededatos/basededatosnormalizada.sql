@@ -17,7 +17,7 @@ CREATE TABLE Control_Glucosa (
     id_usuario INT,
     fecha_control DATETIME,
     deporte BOOLEAN,
-    renta DECIMAL(10,2),
+    lenta INT,
     indice_actividad DECIMAL(5,2),
     PRIMARY KEY (id_usuario, fecha_control),
     FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario) ON DELETE CASCADE
@@ -29,7 +29,7 @@ CREATE TABLE Comida (
     fecha_control DATETIME,
     tipo_comida VARCHAR(50),
     raciones INT,
-    glucosa DECIMAL(5,2),
+    glucosa INT,
     insulina DECIMAL(5,2),
     PRIMARY KEY (id_usuario, fecha_control, tipo_comida),
     FOREIGN KEY (id_usuario, fecha_control) REFERENCES Control_Glucosa(id_usuario, fecha_control) ON DELETE CASCADE
@@ -40,7 +40,7 @@ CREATE TABLE Hiperglucosa (
     id_usuario INT,
     fecha_control DATETIME,
     tipo_comida VARCHAR(50),
-    glucosa DECIMAL(5,2),
+    glucosa INT,
     hora TIME,
     correccion VARCHAR(255),
     PRIMARY KEY (id_usuario, fecha_control, tipo_comida),
@@ -52,7 +52,7 @@ CREATE TABLE Hipoglucosa (
     id_usuario INT,
     fecha_control DATETIME,
     tipo_comida VARCHAR(50),
-    glucosa DECIMAL(5,2),
+    glucosa INT,
     hora TIME,
     PRIMARY KEY (id_usuario, fecha_control, tipo_comida),
     FOREIGN KEY (id_usuario, fecha_control, tipo_comida) REFERENCES Comida(id_usuario, fecha_control, tipo_comida) ON DELETE CASCADE
