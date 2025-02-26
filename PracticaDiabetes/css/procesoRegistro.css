@@ -1,0 +1,54 @@
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Fondo animado con degradado vibrante */
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #1dd1a1);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /* Animación del degradado */
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* Contenedor principal con borde degradado y sombra */
+  .response-container {
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    width: 360px;
+    border: 3px solid transparent;
+    border-image: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #1dd1a1) 1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+  }
+  
+  /* Mensaje de respuesta */
+  .mensaje-respuesta {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  
+  /* Adaptación para dispositivos pequeños */
+  @media (max-width: 400px) {
+    .response-container {
+      width: 90%;
+      padding: 20px;
+    }
+  }
+  
