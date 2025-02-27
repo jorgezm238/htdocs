@@ -3,30 +3,26 @@
     require_once 'login.php';
     $connection = new mysqli($hn, $un, $pw, $db);
     if ($connection->connect_error) die("Fatal Error");
-    $query = "
-    SELECT u.Codigo, u.Nombre, COUNT(c.codusuario) AS contactos
+    /*$query = "
+    SELECT u.Codigo, u.Nombre, c.contactos AS contactos FROM usuarios u
+    LEFT JOIN 
+        (
+            SELECT codusuario, COUNT(*) AS contactos FROM contactos 
+            GROUP BY 
+                codusuario
+        ) c
+    ON 
+        u.Codigo = c.codusuario
+    ";
+    LEFT JOIN IMPRIME AUNQUE NO SAQUE CONTACTO 
+*/
+    $query = "SELECT u.Codigo, u.Nombre, COUNT(c.codusuario) AS contactos
     FROM usuarios u
     INNER JOIN contactos c ON u.Codigo = c.codusuario
-    GROUP BY u.Codigo, u.Nombre;
-    ";
+    GROUP BY u.Codigo, u.Nombre;";
 
-    //INNER JOIN: Une usuarios con contactos, asegurando que solo se incluyan usuarios con al menos un contacto.
-
-
-    /*$query = "SELECT u.Codigo, u.Nombre, COUNT(c.codusuario) AS contactos
-          FROM usuarios u
-          LEFT JOIN contactos c ON u.Codigo = c.codusuario
-          GROUP BY u.Codigo, u.Nombre";
-          
-          
-          COUNT(c.codusuario) cuenta cuántos contactos tiene cada usuario.
-          LEFT JOIN mantiene a los usuarios aunque no tengan contactos.
-          GROUP BY agrupa por usuario para contar los contactos correctamente.
-          */
-
-
-    $result = $connection->query($query);
-    if (!$result) die("Fatal Error");
+        $result = $connection->query($query);
+            if (!$result) die("Fatal Error");
 ?>
 
 <!DOCTYPE html>
