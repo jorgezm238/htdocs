@@ -5,7 +5,7 @@ include("conexion.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $login = $_POST['login'];
     $clave = $_POST['clave'];
-
+    
     $sql = "SELECT * FROM jugador WHERE login = ? AND clave = ?";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("ss", $login, $clave);
@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($resultado->num_rows == 1) {
         $_SESSION['login'] = $login;
+        $_SESSION['nombre']= $resultado->fetch_assoc()['nombre'];
         header("Location: inicio.php");
         exit();
     } else {
