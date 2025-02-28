@@ -39,15 +39,14 @@ $mysqli->close();
     <title>Estadísticas de Glucosa</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: lightgray;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            flex-direction: column;
-        }
+body {
+  background: #ff8800; /* Color naranja sólido */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
         .container {
             background: white;
             padding: 20px;

@@ -1,0 +1,67 @@
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+  }
+  
+  /* Fondo general */
+  body {
+    background: #2c3e50; /* Gris oscuro azulado */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #fff;
+  }
+  
+  /* Contenedor del mensaje */
+  .mensaje-contenedor {
+    background: #ecf0f1; /* Gris claro */
+    padding: 30px;
+    border-radius: 12px;
+    width: 50%;
+    max-width: 500px;
+    border: 2px solid #bdc3c7;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+  
+  /* Mensaje de éxito */
+  .mensaje-exito {
+    color: #27ae60; /* Verde éxito */
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Mensaje de error */
+  .mensaje-error {
+    color: #e74c3c; /* Rojo error */
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Botón para volver */
+  .boton-volver {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background: #2980b9; /* Azul oscuro */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+  }
+  
+  .boton-volver:hover {
+    background: #1f6690; /* Azul más oscuro */
+    transform: scale(1.05);
+  }
+  

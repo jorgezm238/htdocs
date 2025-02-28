@@ -5,15 +5,13 @@
     padding: 0;
   }
   
-  /* Fondo con animación de degradado vibrante */
+  
   body {
-    font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #1dd1a1);
-    background-size: 400% 400%;
-    animation: gradientAnimation 15s ease infinite;
+    background: #ff8800; /* Color naranja sólido */
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     min-height: 100vh;
   }
   /* Mensaje de error */
@@ -24,12 +22,7 @@
     font-weight: bold; /* Opcional: para resaltar más el texto */
   }
   
-  /* Animación para el degradado de fondo */
-  @keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+
   
   /* Contenedor principal con borde degradado */
   .session-container {

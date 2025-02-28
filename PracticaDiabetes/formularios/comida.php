@@ -10,217 +10,213 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro de Datos para la Diabetes</title>
   <style>
-    /* Reset básico */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Montserrat', sans-serif;
-    }
+  /* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
 
-    /* Fondo animado con degradado vibrante */
-    body {
-      background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #1dd1a1);
-      background-size: 400% 400%;
-      animation: gradientAnimation 15s ease infinite;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+/* Estilos generales del cuerpo */
+body {
+  background: #ff8800; /* Color naranja sólido */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
 
-    /* Animación del degradado */
-    @keyframes gradientAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+/* Contenedor principal del formulario */
+.contenedor-formulario {
+  order: 2;
+  background: #f5e6c8; /* Fondo beige claro */
+  padding: 40px;
+  border-radius: 12px;
+  width: 360px;
+  border: 3px solid #d4a373; /* Borde marrón suave */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  color: #222; /* Color oscuro para el texto */
+}
 
-    /* Elementos en orden: bienvenida, formulario y botón de cerrar sesión al final */
-    .mensaje-bienvenida {
-      order: 1;
-      font-size: 30px;
-      font-weight: 600;
-      margin-bottom: 40px;
-      color: #fff;  /* Color blanco para el mensaje */
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.3), 0 0 25px rgba(255,165,0,0.5);
-      text-align: center;
-    }
+/* Estilos generales para todos los textos */
+h1, h2, label, p {
+  font-family: 'Montserrat', sans-serif;
+  color: #333; /* Color oscuro para buena legibilidad */
+}
 
-    .contenedor-formulario {
-      order: 2;
-      background: #fff;
-      padding: 40px;
-      border-radius: 12px;
-      width: 360px;
-      border: 3px solid transparent;
-      border-image: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #1dd1a1) 1;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      color: #222; /* Color más oscuro para el texto */
-    }
+/* Estilos para el título principal */
+.contenedor-formulario h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 600;
+  font-size: 28px;
+}
 
-    /* Título del contenedor */
-    .contenedor-formulario h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-weight: 600;
-      font-size: 28px;
-      color: #333; /* Título un poco más oscuro */
-    }
+/* Estilos para los subtítulos */
+.form-section h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 10px;
+  color: #d4a373; /* Marrón suave para los subtítulos */
+}
 
-    /* Estilos para los grupos de entrada */
-    .input-group {
-      margin-bottom: 15px;
-    }
+/* Estilos de los grupos de entrada */
+.input-group {
+  margin-bottom: 15px;
+}
 
-    .input-group label {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 5px;
-      color: #444; /* Texto de etiqueta un poco más oscuro */
-    }
+.input-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #444;
+}
 
-    .input-group input,
-    .input-group select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 16px;
-      background: #f9f9f9;
-      color: #333;
-      outline: none;
-    }
+/* Estilos generales para inputs y selects */
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background: #f9f9f9;
+  color: #333;
+  outline: none;
+}
 
-    .input-group input::placeholder,
-    .input-group select {
-      color: #aaa;
-    }
+/* Placeholder en los inputs */
+.input-group input::placeholder,
+.input-group select {
+  color: #aaa;
+}
 
-    /* Secciones del formulario */
-    .form-section {
-      margin-bottom: 30px;
-    }
+/* Botón de cerrar sesión */
+.btn-cerrar {
+  order: 3;
+  margin-top: 20px;
+  background: #dc3545; /* Rojo */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
 
-    .form-section h2 {
-      font-size: 18px;
-      margin-bottom: 15px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      padding-bottom: 10px;
-      color: #28a745; /* Verde para los subtítulos */
-    }
+.btn-cerrar:hover {
+  background: #c82333; /* Rojo más oscuro */
+}
 
-    /* Botones de opción (para enviar datos y menú principal) */
-    .button-container {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
+/* Botones de opciones (enviar datos y menú principal) */
+.button-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
 
-    .submit-btn,
-    .choose-btn {
-      width: 48%;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      font-weight: bold;
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-    }
+.submit-btn,
+.choose-btn {
+  width: 48%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
 
-    /* Botón de enviar */
-    .submit-btn {
-      background: #28a745; /* Verde */
-    }
-    .submit-btn:hover {
-      background: #218838; /* Verde más oscuro al pasar el ratón */
-      transform: scale(1.05);
-    }
+/* Botón de enviar */
+.submit-btn {
+  background: #28a745; /* Verde */
+}
+.submit-btn:hover {
+  background: #218838; /* Verde más oscuro */
+  transform: scale(1.05);
+}
 
-    /* Botón de menú principal */
-    .choose-btn {
-      background: #6610f2; /* Morado */
-    }
-    .choose-btn:hover {
-      background: #520dc2; /* Morado más oscuro */
-      transform: scale(1.05);
-    }
+/* Botón de menú principal */
+.choose-btn {
+  background: #6610f2; /* Morado */
+}
+.choose-btn:hover {
+  background: #520dc2; /* Morado más oscuro */
+  transform: scale(1.05);
+}
 
-    /* Opciones de comida (botones para Desayuno, Comida, Cena) */
-    .food-options {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 10px;
-    }
+/* Opciones de comida */
+.food-options {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
 
-    .food-option {
-      padding: 10px;
-      background-color: #ffc107; /* Amarillo */
-      border: none;
-      border-radius: 5px;
-      color: #fff;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-    }
+.food-option {
+  padding: 10px;
+  background-color: #ffc107; /* Amarillo */
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
 
-    .food-option:hover {
-      background-color: #e0a800; /* Amarillo más oscuro */
-      transform: scale(1.05);
-    }
+.food-option:hover {
+  background-color: #e0a800; /* Amarillo más oscuro */
+  transform: scale(1.05);
+}
 
-    /* Estilos para las secciones de Hiperglucemia e Hipoglucemia */
-    .event-section {
-      transition: max-height 0.5s ease-in-out, opacity 0.5s ease;
-      overflow: hidden;
-      opacity: 0;
-      max-height: 0;
-      background: transparent;
-      border-radius: 5px;
-      padding: 15px;
-      margin-top: 15px;
-      color: #333;
-    }
+/* Secciones de eventos */
+.event-section {
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease;
+  overflow: hidden;
+  opacity: 0;
+  max-height: 0;
+  background: transparent;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 15px;
+  color: #333;
+}
 
-    .event-section.active {
-      opacity: 1;
-      max-height: 500px;
-    }
+.event-section.active {
+  opacity: 1;
+  max-height: 500px;
+}
 
-    /* Botón de cerrar sesión */
-    .btn-cerrar {
-      order: 3;
-      margin-top: 20px;
-      background: #dc3545; /* Rojo */
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-    .btn-cerrar:hover {
-      background: #c82333; /* Rojo más oscuro */
-    }
+/* Mensaje de bienvenida */
+.mensaje-bienvenida {
+  order: 1;
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 40px;
+  color: #fff;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.3), 0 0 25px rgba(255,165,0,0.5);
+  text-align: center;
+}
 
-    /* Estilo para el mensaje de error */
-    .error-message {
-      color: #dc3545; /* Rojo para el texto de error */
-      text-align: center;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
+/* Mensaje de error */
+.error-message {
+  color: #dc3545; /* Rojo para el texto de error */
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
 
-    /* Adaptación para dispositivos pequeños */
-    @media (max-width: 400px) {
-      .contenedor-formulario {
-        width: 90%;
-        padding: 20px;
-      }
-    }
+/* Adaptación para dispositivos pequeños */
+@media (max-width: 400px) {
+  .contenedor-formulario {
+    width: 90%;
+    padding: 20px;
+  }
+}
+
   </style>
 </head>
 <body>

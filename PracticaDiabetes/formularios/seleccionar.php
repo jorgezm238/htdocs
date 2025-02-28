@@ -17,24 +17,15 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
       font-family: 'Montserrat', sans-serif;
     }
     
-    /* Fondo animado con degradado vibrante */
     body {
-      background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #1dd1a1);
-      background-size: 400% 400%;
-      animation: gradientAnimation 15s ease infinite;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
-    
-    @keyframes gradientAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+  background: #ff8800; /* Color naranja sólido */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
     
     /* Mensaje de bienvenida */
     .mensaje-bienvenida {
@@ -47,23 +38,22 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
       text-align: center;
     }
     
-    /* Contenedor del formulario con menos borde */
     .contenedor-formulario {
-      order: 2;
-      position: relative;
-      width: 600px;
-      padding: 60px;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(12px);
-      border-radius: 16px;
-      color: #fff;
-      text-align: center;
-      overflow: hidden;
-      z-index: 1;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border: 1px solid #000; /* Borde negro menos grueso */
-    }
+  order: 2;
+  position: relative;
+  width: 600px;
+  padding: 60px;
+  background: #ecf0f1; /* Gris claro */
+  border-radius: 16px;
+  color: #2c3e50; /* Texto en gris oscuro para contraste */
+  text-align: center;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #bdc3c7; /* Borde gris suave */
+}
+
     
     .contenedor-formulario::before {
       content: "";
@@ -80,12 +70,7 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
       animation: borderAnimation 10s linear infinite;
       opacity: 0.5; /* Menos opacidad */
     }
-    
-    @keyframes borderAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+
     
     .contenedor-formulario:hover {
       transform: scale(1.03);

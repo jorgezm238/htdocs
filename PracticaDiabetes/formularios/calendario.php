@@ -59,60 +59,116 @@ $mysqli->close();
     <meta charset="UTF-8">
     <title>Visualizar Información</title>
     <style>
-        /* Estilos básicos */
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #1dd1a1);
-            background-size: 400% 400%;
-            animation: gradientAnimation 15s ease infinite;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
+  /* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
 
-        /* Animación para el fondo degradado */
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+/* Fondo general */
+body {
+  background: #ff8800; /* Color naranja sólido */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #333;
+}
 
-        /* Estilos para la tabla */
-        table {
-            width: 90%;
-            max-width: 800px;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
+/* Contenedor del formulario y tabla */
+.container {
+  width: 80%;
+  max-width: 850px;
+  padding: 30px;
+  background: #ecf0f1; /* Fondo gris claro */
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
 
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
+/* Título dentro del cuadro */
+h1 {
+  font-size: 24px;
+  color: #2c3e50; /* Azul oscuro */
+  margin-bottom: 20px;
+}
 
-        th {
-            background-color: #feca57;
-        }
+/* Estilos para el formulario */
+form {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
 
-        .container {
-            width: 80%;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
+label {
+  font-weight: bold;
+  color: #333;
+}
 
-        form {
-            margin-bottom: 20px;
-        }
+select, input, button {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
 
-        label, select, input, button {
-            padding: 8px;
-            margin-top: 5px;
-        }
+button {
+  background: #2980b9; /* Azul */
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background: #1f6690; /* Azul más oscuro */
+  transform: scale(1.05);
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Encabezado de la tabla */
+th {
+  background: #feca57; /* Amarillo */
+  color: #333;
+  padding: 12px;
+  font-size: 16px;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Celdas de la tabla */
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Alternar colores en filas */
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* Mensaje de "No hay datos" */
+p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #c0392b; /* Rojo */
+  margin-top: 20px;
+}
+
     </style>
 </head>
 <body>

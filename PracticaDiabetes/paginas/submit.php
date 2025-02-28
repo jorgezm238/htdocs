@@ -7,7 +7,7 @@ if (!isset($_SESSION['id_usu'])) {
 
 $idUser = $_SESSION['id_usu'];
 
-include '../conexion.php';  // Asegúrate de que la ruta es correcta
+include '../conexion.php';
 
 $fecha = $_POST['dateInput'];
 $tipo_comida = $_POST['mealType'];
@@ -17,7 +17,6 @@ $check_control = "SELECT * FROM CONTROL_GLUCOSA WHERE fecha = '$fecha' AND id_us
 $result_control = $conn->query($check_control);
 
 if ($result_control->num_rows == 0) {
-    // Inserta primero en CONTROL_GLUCOSA si no existe
     $deporte = $_POST['sportInput'];
     $lenta = $_POST['slowInsulin'];
     $sql_control = "INSERT INTO CONTROL_GLUCOSA (fecha, deporte, lenta, id_usu)
@@ -25,7 +24,7 @@ if ($result_control->num_rows == 0) {
     $conn->query($sql_control);
 }
 
-// Ahora, procede con COMIDA
+// Inserción en COMIDA
 $gl_1h = $_POST['gl1h'];
 $gl_2h = $_POST['gl2h'];
 $raciones = $_POST['carbServings'];
@@ -34,8 +33,10 @@ $insulina = $_POST['fastInsulin'];
 $sql_comida = "INSERT INTO COMIDA (tipo_comida, gl_1h, gl_2h, raciones, insulina, fecha, id_usu)
                VALUES ('$tipo_comida', $gl_1h, $gl_2h, $raciones, $insulina, '$fecha', $idUser)";
 
+$mensaje = "";
+$clase_mensaje = "";
+
 if ($conn->query($sql_comida)) {
-    // Verificar tipo de evento para inserción condicional en HIPERGLUCEMIA o HIPOGLUCEMIA
     $eventType = $_POST['eventType'];
     if ($eventType === 'hiperglucemia') {
         $glucosa = $_POST['hyperGlucose'];
@@ -53,13 +54,32 @@ if ($conn->query($sql_comida)) {
     }
 
     if (isset($sql_event) && !$conn->query($sql_event)) {
-        echo "Error al insertar evento: " . $conn->error;
+        $mensaje = "Error al insertar evento: " . $conn->error;
+        $clase_mensaje = "mensaje-error";
     } else {
-        echo "Datos insertados correctamente.";
+        $mensaje = "Datos insertados correctamente.";
+        $clase_mensaje = "mensaje-exito";
     }
 } else {
-    echo "Error al insertar en COMIDA: " . $conn->error;
+    $mensaje = "Error al insertar en COMIDA: " . $conn->error;
+    $clase_mensaje = "mensaje-error";
 }
 
 $conn->close();
 ?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado del Registro</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    </head>
+<body>
+    <div class="mensaje-contenedor">
+        <p class="<?php echo $clase_mensaje; ?>"><?php echo $mensaje; ?></p>
+        <a href="javascript:history.back()" class="boton-volver">Volver</a>
+    </div>
+</body>
+</html>
