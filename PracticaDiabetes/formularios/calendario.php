@@ -1,298 +1,179 @@
 <?php
 session_start();
+
+// Verificar si el usuario está autenticado
 if (!isset($_SESSION['id_usu'])) {
     die("Usuario no autenticado.");
 }
-$idUser = intval($_SESSION['id_usu']);
+$idUser = $_SESSION['id_usu'];
 
 $host    = "localhost";
 $dbname  = "diabetesdb";
 $dbUser  = "root";
 $dbPass  = "";
 
-// Conexión con mysqli
+// Crear conexión
 $mysqli = new mysqli($host, $dbUser, $dbPass, $dbname);
 if ($mysqli->connect_error) {
     die("Error de conexión: " . $mysqli->connect_error);
 }
 
-// Obtener mes y año (o usar los actuales si no vienen por GET)
-$month = isset($_GET['mes']) ? $_GET['mes'] : date('m');
-$year  = isset($_GET['anio']) ? $_GET['anio'] : date('Y');
-
-// Calcular fecha de inicio, días del mes y día de la semana
-$firstDay = date('Y-m-01', strtotime("$year-$month-01"));
-$daysInMonth = date('t', strtotime($firstDay));
-$weekDay = date('N', strtotime($firstDay)); // 1 (Lun) a 7 (Dom)
-
-/**
- * Consulta unificada con UNION para traer los datos 
- * que quieras mostrar debajo de cada día.
- * Ajusta CONCAT(...) según tus campos y formato preferido.
- */
-$sql = "
-  SELECT 
-    fecha,
-    CONCAT('GLUCOSA => Deporte:', deporte, ', Lenta:', lenta) AS info
-  FROM CONTROL_GLUCOSA
-  WHERE id_usu = $idUser
-
-  UNION
-
-  SELECT
-    fecha,
-    CONCAT('COMIDA => ', tipo_comida,
-           ' | gl_1h:', gl_1h,
-           ' | gl_2h:', gl_2h,
-           ' | raciones:', raciones,
-           ' | insulina:', insulina
-    ) AS info
-  FROM COMIDA
-  WHERE id_usu = $idUser
-
-  UNION
-
-  SELECT
-    fecha,
-    CONCAT('HIPERGLUCEMIA => Glucosa:', glucosa,
-           ' | Hora:', hora,
-           ' | Corrección:', correccion,
-           ' | Tipo:', tipo_comida
-    ) AS info
-  FROM HIPERGLUCEMIA
-  WHERE id_usu = $idUser
-
-  UNION
-
-  SELECT
-    fecha,
-    CONCAT('HIPOGLUCEMIA => Glucosa:', glucosa,
-           ' | Hora:', hora,
-           ' | Tipo:', tipo_comida
-    ) AS info
-  FROM HIPOGLUCEMIA
-  WHERE id_usu = $idUser
-";
-
-$result = $mysqli->query($sql);
+// Inicializar variables para el mes y año
+$month = $year = null;
 $events = [];
 
-/**
- * Recorremos los resultados y agrupamos por fecha.
- * Cada fecha tendrá un array de strings con la info.
- */
-while ($row = $result->fetch_assoc()) {
-    $events[$row['fecha']][] = $row['info'];
+// Comprobar si se ha enviado el formulario
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $month = $_POST['mes'] ?? date('m');
+    $year  = $_POST['anio'] ?? date('Y');
+
+    $firstDay = date('Y-m-01', strtotime("$year-$month-01"));
+    $lastDay = date('Y-m-t', strtotime("$firstDay"));
+
+    $sql = "
+        SELECT C.fecha, C.tipo_comida, C.gl_1h, C.gl_2h, C.raciones, C.insulina,
+               H.glucosa AS glucosa_hiper, H.hora AS hora_hiper,
+               P.glucosa AS glucosa_hipo, P.hora AS hora_hipo
+        FROM COMIDA C
+        LEFT JOIN HIPERGLUCEMIA H ON C.fecha = H.fecha AND C.tipo_comida = H.tipo_comida AND C.id_usu = H.id_usu
+        LEFT JOIN HIPOGLUCEMIA P ON C.fecha = P.fecha AND C.tipo_comida = P.tipo_comida AND C.id_usu = P.id_usu
+        WHERE C.id_usu = $idUser AND C.fecha BETWEEN '$firstDay' AND '$lastDay'
+        ORDER BY C.fecha, C.tipo_comida";
+
+    $result = $mysqli->query($sql);
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $events[$row['fecha']][] = $row;
+        }
+    } else {
+        echo "Error al recuperar los datos: " . $mysqli->error;
+    }
 }
+
+$mysqli->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Calendario Diabetes</title>
-  <style>
-    /* Reset básico */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Montserrat', sans-serif;
-    }
+    <meta charset="UTF-8">
+    <title>Visualizar Información</title>
+    <style>
+        /* Estilos básicos */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #1dd1a1);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
 
-    /* Fondo animado con degradado vibrante */
-    body {
-      background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #1dd1a1);
-      background-size: 400% 400%;
-      animation: gradientAnimation 15s ease infinite;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-    @keyframes gradientAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        /* Animación para el fondo degradado */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    /* Contenedor del calendario con borde negro 1px */
-    .calendario {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      width: 90%;
-      max-width: 800px;
-      text-align: center;
-      color: white;
-      border: 1px solid #000; /* Borde negro 1px */
-    }
+        /* Estilos para la tabla */
+        table {
+            width: 90%;
+            max-width: 800px;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
 
-    .calendar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    .calendar-header a {
-      text-decoration: none;
-      color: white;
-      background: #8e44ad;
-      padding: 12px 20px;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-    .calendar-header a:hover {
-      background: #9b59b6;
-    }
-    .calendar-header h1 {
-      font-size: 28px;
-    }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
 
-    /* Grid para los días */
-    .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-    .day-name {
-      font-weight: bold;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 15px;
-      border-radius: 5px;
-      font-size: 20px;
-    }
+        th {
+            background-color: #feca57;
+        }
 
-    .day-cell {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 5px;
-      font-size: 20px;
-      transition: background 0.3s, transform 0.2s;
-      cursor: default; /* Ya no enlazamos a otra página */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .day-cell:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: scale(1.05);
-    }
+        .container {
+            width: 80%;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
 
-    .day-number {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
+        form {
+            margin-bottom: 20px;
+        }
 
-    /* Estilo para la info real */
-    .event-data {
-      margin-top: 5px;
-      font-size: 0.8rem;
-      color: #fff;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 2px 4px;
-      border-radius: 3px;
-      margin-bottom: 2px;
-      text-align: left;
-    }
-
-    .button-container {
-      margin-top: 20px;
-      text-align: center;
-    }
-    .choose-btn {
-      background-color: #8e44ad;
-      color: #fff;
-      border: none;
-      padding: 15px 30px;
-      font-size: 18px;
-      font-weight: bold;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-    }
-    .choose-btn:hover {
-      background-color: #2980b9;
-      transform: scale(1.05);
-    }
-    .choose-btn:active {
-      background-color: #1f618d;
-      transform: scale(0.98);
-    }
-
-    @keyframes gradientAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    @media (max-width: 400px) {
-      .calendario {
-        width: 90%;
-        padding: 15px;
-      }
-      .calendar-header h1 {
-        font-size: 22px;
-      }
-      .day-name, .day-cell {
-        font-size: 16px;
-        padding: 10px;
-      }
-      .choose-btn {
-        padding: 10px 20px;
-        font-size: 16px;
-      }
-    }
-  </style>
+        label, select, input, button {
+            padding: 8px;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
-<div class="calendario">
-  <div class="calendar-header">
-    <a href="?mes=<?= ($month == 1) ? 12 : $month - 1 ?>&anio=<?= ($month == 1) ? $year - 1 : $year ?>">◀ Anterior</a>
-    <h1><?= date("F Y", strtotime($firstDay)) ?></h1>
-    <a href="?mes=<?= ($month == 12) ? 1 : $month + 1 ?>&anio=<?= ($month == 12) ? $year + 1 : $year ?>">Siguiente ▶</a>
-  </div>
+    <div class="container">
+        <h1>Seleccione el mes y año para visualizar la información</h1>
+        <form method="post">
+            <label for="mes">Mes:</label>
+            <select name="mes" id="mes">
+                <?php for ($i = 1; $i <= 12; $i++): ?>
+                    <option value="<?= str_pad($i, 2, '0', STR_PAD_LEFT) ?>" <?= $i == $month ? 'selected' : '' ?>><?= $i ?></option>
+                <?php endfor; ?>
+            </select>
 
-  <div class="calendar-grid">
-    <div class="day-name">Lun</div>
-    <div class="day-name">Mar</div>
-    <div class="day-name">Mié</div>
-    <div class="day-name">Jue</div>
-    <div class="day-name">Vie</div>
-    <div class="day-name">Sáb</div>
-    <div class="day-name">Dom</div>
+            <label for="anio">Año:</label>
+            <input type="number" name="anio" id="anio" value="<?= $year ?? date('Y') ?>">
 
-    <?php
-    // Espacios vacíos hasta el primer día de la semana
-    for ($i = 1; $i < $weekDay; $i++) {
-        echo "<div class='day-cell'></div>";
-    }
+            <button type="submit">Mostrar Datos</button>
+        </form>
 
-    // Generar las celdas para cada día del mes
-    for ($day = 1; $day <= $daysInMonth; $day++) {
-        $currentDate = "$year-$month-" . str_pad($day, 2, "0", STR_PAD_LEFT);
-        echo "<div class='day-cell'>";
-        echo "<div class='day-number'>$day</div>";
-        
-        // Mostrar la info (eventos) si existen
-        if (isset($events[$currentDate])) {
-            foreach ($events[$currentDate] as $detail) {
-                echo "<div class='event-data'>$detail</div>";
-            }
-        }
-        echo "</div>";
-    }
-    ?>
-  </div>
-
-  <div class="button-container">
-    <button type="button" class="choose-btn" onclick="window.location.href='seleccionar.php'">Volver</button>
-  </div>
-</div>
-<?php $mysqli->close(); ?>
+        <?php if (!empty($events)): ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Tipo de Comida</th>
+                        <th>Glucosa 1h</th>
+                        <th>Glucosa 2h</th>
+                        <th>Raciones</th>
+                        <th>Insulina</th>
+                        <th>Evento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($events as $date => $infos): ?>
+                        <?php foreach ($infos as $info): ?>
+                            <tr>
+                                <td><?= $date ?></td>
+                                <td><?= $info['tipo_comida'] ?></td>
+                                <td><?= $info['gl_1h'] ?> mg/dL</td>
+                                <td><?= $info['gl_2h'] ?> mg/dL</td>
+                                <td><?= $info['raciones'] ?></td>
+                                <td><?= $info['insulina'] ?> UI</td>
+                                <td>
+                                    <?php
+                                    if ($info['glucosa_hiper']) {
+                                        echo "Hiperglucemia: {$info['glucosa_hiper']} mg/dL a las {$info['hora_hiper']}";
+                                    } elseif ($info['glucosa_hipo']) {
+                                        echo "Hipoglucemia: {$info['glucosa_hipo']} mg/dL a las {$info['hora_hipo']}";
+                                    } else {
+                                        echo "Ninguno";
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php elseif ($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
+            <p>No hay datos para mostrar.</p>
+        <?php endif; ?>
+    </div>
 </body>
 </html>
