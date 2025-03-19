@@ -1,21 +1,16 @@
 <?php
 session_start();
 
-// Verificar si el usuario está autenticado
+//Verificar si el usuario está autenticado
 if (!isset($_SESSION['id_usu'])) {
     die("Usuario no autenticado.");
 }
 $idUser = $_SESSION['id_usu'];
 
-$host    = "localhost";
-$dbname  = "diabetesdb";
-$dbUser  = "root";
-$dbPass  = "";
+include_once 'conexion.php';  //Aquí se incluye la conexión a la base de datos
 
-// Crear conexión
-$mysqli = new mysqli($host, $dbUser, $dbPass, $dbname);
-if ($mysqli->connect_error) {
-    die("Error de conexión: " . $mysqli->connect_error);
+if ($conn->connect_error) {  
+    die("Error de conexión: " . $conn->connect_error);
 }
 
 // Inicializar variables para el mes y año
@@ -40,18 +35,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         WHERE C.id_usu = $idUser AND C.fecha BETWEEN '$firstDay' AND '$lastDay'
         ORDER BY C.fecha, C.tipo_comida";
 
-    $result = $mysqli->query($sql);
+    $result = $conn->query($sql);  
     if ($result) {
         while ($row = $result->fetch_assoc()) {
             $events[$row['fecha']][] = $row;
         }
     } else {
-        echo "Error al recuperar los datos: " . $mysqli->error;
+        echo "Error al recuperar los datos: " . $conn->error; 
     }
 }
 
-$mysqli->close();
+$conn->close();  
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">

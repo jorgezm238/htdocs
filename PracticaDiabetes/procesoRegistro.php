@@ -2,7 +2,7 @@
 session_start();
 
 // Incluir archivo de conexión
-include '../conexion.php';
+include 'conexion.php';
 
 $responseMessage = ""; // Variable para almacenar el mensaje de respuesta
 
@@ -54,7 +54,7 @@ $conn->close();
 <head>
   <meta charset="UTF-8">
   <title>Proceso de Registro</title>
-  <link rel="stylesheet" href="../css/procesoRegistro.css">
+  <link rel="stylesheet" href="procesoRegistro.css">
   </head>
 <body>
   <div class="response-container">

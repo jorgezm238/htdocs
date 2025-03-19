@@ -36,11 +36,5 @@
     line-height: 1.5;
   }
   
-  /* Adaptación para dispositivos pequeños */
-  @media (max-width: 400px) {
-    .response-container {
-      width: 90%;
-      padding: 20px;
-    }
-  }
+
   

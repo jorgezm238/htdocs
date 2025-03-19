@@ -128,17 +128,10 @@ $nombreUsuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
       background: linear-gradient(45deg, #ff4b2b, #ff416c);
     }
     
-    /* Adaptación para dispositivos pequeños */
-    @media (max-width: 400px) {
-      .contenedor-formulario {
-        width: 90%;
-        padding: 20px;
-      }
-    }
   </style>
 </head>
 <body>
-  <button class="btn-cerrar" onclick="window.location.href='../index.php';">Cerrar sesión</button>
+  <button class="btn-cerrar" onclick="window.location.href='index.php';">Cerrar sesión</button>
   <div class="mensaje-bienvenida">
     ¡Bienvenido, <?php echo htmlspecialchars($nombreUsuario); ?>!
   </div>

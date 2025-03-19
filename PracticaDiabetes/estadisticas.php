@@ -8,9 +8,9 @@ if (!isset($_SESSION['id_usu'])) {
 $idUser = $_SESSION['id_usu'];
 
 // Conexión a la base de datos
-$mysqli = new mysqli("localhost", "root", "", "diabetesdb");
-if ($mysqli->connect_error) {
-    die("Error de conexión: " . $mysqli->connect_error);
+require_once 'conexion.php';
+if ($conn->connect_error) {  
+    die("Error de conexión: " . $conn->connect_error);
 }
 
 // Obtener mes y año seleccionados o usar los actuales
@@ -19,7 +19,7 @@ $year = $_POST['anio'] ?? date('Y');
 
 // Consulta para obtener niveles de glucosa por día
 $sql = "SELECT DAY(fecha) AS dia, lenta FROM CONTROL_GLUCOSA WHERE id_usu = $idUser AND MONTH(fecha) = $month AND YEAR(fecha) = $year";
-$result = $mysqli->query($sql);
+$result = $conn->query($sql); 
 
 $glucosa_dias = [];
 while ($row = $result->fetch_assoc()) {
@@ -29,8 +29,9 @@ while ($row = $result->fetch_assoc()) {
 // Calcular promedio de glucosa lenta
 $promedio_glucosa_lenta = !empty($glucosa_dias) ? array_sum($glucosa_dias) / count($glucosa_dias) : 0;
 
-$mysqli->close();
+$conn->close(); 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
