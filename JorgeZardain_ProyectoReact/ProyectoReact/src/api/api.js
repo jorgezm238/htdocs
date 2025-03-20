@@ -1,8 +1,8 @@
-const API_BASE_URL = "http://localhost/SERVIDOR-main/PhpInsulina"; 
+const API_BASE_URL = "http://localhost/JorgeZardain_ProyectoReact/PhpInsulina"; 
 
 
 export const getUsers = async () => {
-  const response = await fetch("http://localhost/SERVIDOR-main/PhpInsulina/getUsers.php");
+  const response = await fetch("http://localhost/JorgeZardain_ProyectoReact/PhpInsulina/getUsers.php");
   return response.json();
 };
 
