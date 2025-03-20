@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { getStatistics } from '../api/api';
 import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, LineElement } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement } from 'chart.js';
 
-ChartJS.register(CategoryScale, LinearScale, LineElement);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
 const Statistics = () => {
   const [stats, setStats] = useState(null);
@@ -12,7 +12,7 @@ const Statistics = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const data = await getStatistics("2023-05");
+        const data = await getStatistics("2023-05"); 
         setStats(data);
         
         setChartData({
@@ -21,10 +21,11 @@ const Statistics = () => {
             {
               label: "Evolución LENTA",
               data: data.evolucion.map(item => item.valor),
-              borderColor: '#007bff',
-              borderWidth: 2,
               fill: false,
-              tension: 0.1 // Slightly smooths the line without making it curvy
+              borderColor: "#4CAF50",
+              borderWidth: 5,
+              pointBackgroundColor: "#4CAF50",
+              pointRadius: 5
             }
           ]
         });
@@ -35,37 +36,30 @@ const Statistics = () => {
     fetchStats();
   }, []);
 
-  if (!stats) return <div>Cargando estadísticas...</div>;
-
-  const options = {
-    responsive: true,
-    plugins: {
-      tooltip: {
-        callbacks: {
-          label: function(context) {
-            return `Valor: ${context.parsed.y}`;
-          }
-        }
-      }
-    },
-    scales: {
-      y: {
-        beginAtZero: false
-      }
-    }
-  };
+  if (!stats) return <div style={{ textAlign: "center", fontSize: "18px", color: "#666" }}>Cargando estadísticas...</div>;
 
   return (
-    <div>
-      <h2>Estadísticas del Indicador LENTA</h2>
-      <p>Valor medio: {stats.media}</p>
-      <p>Valor mínimo: {stats.min}</p>
-      <p>Valor máximo: {stats.max}</p>
-      <div style={{ maxWidth: "600px", margin: "0 auto" }}>
-        <Line data={chartData} options={options} />
+    <div style={{ display: "flex", alignItems: "flex-start", gap: "20px", padding: "20px" }}>
+      <div style={{ flex: 1, maxWidth: "300px" }}>
+        <h2>Estadísticas del Indicador de insulina lenta</h2>
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <tbody>
+            <tr><td style={cellStyle}><strong>Valor medio:</strong></td><td style={cellStyle}>{stats.media}</td></tr>
+            <tr><td style={cellStyle}><strong>Valor mínimo:</strong></td><td style={cellStyle}>{stats.min}</td></tr>
+            <tr><td style={cellStyle}><strong>Valor máximo:</strong></td><td style={cellStyle}>{stats.max}</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style={{ flex: 2, maxWidth: "600px" }}>
+        <Line data={chartData} />
       </div>
     </div>
   );
+};
+
+const cellStyle = {
+  padding: "8px",
+  borderBottom: "1px solid #ddd"
 };
 
 export default Statistics;

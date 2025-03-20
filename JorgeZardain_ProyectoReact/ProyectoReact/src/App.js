@@ -20,7 +20,7 @@ function App() {
   return (
     <ValidationProvider>
       <div className="App">
-        <h1>Control de Insulina - Gestión de Usuarios</h1>
+        <h1>Control de Insulina React</h1>
         <UserForm userToEdit={userToEdit} onFormSubmit={handleFormSubmit} />
         <UserList key={refresh} onEdit={handleEdit} />
         <Statistics />
