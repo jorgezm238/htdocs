@@ -1,0 +1,4 @@
+La carpeta ProyectoReact es donde esta mi proyecto y donde hago el npm start
+La carpeta PhpInsulina se tiene que meter en el xampp 
+Y el archivo sql diabetesdb es mi base de datos para phpmyadmin
+He borrado el node_modules para poder comprimirlo y falta que lo añadas
