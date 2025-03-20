@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crear Cuenta de Usuario</title>
-  <link rel="stylesheet" href="css/register.css">
+  <link rel="stylesheet" href="register.css">
 </head>
 <body>
   <div class="registro-container">
@@ -13,7 +13,7 @@
       <p class="mensaje-error"><?php echo htmlspecialchars($_GET['error']); ?></p>
     <?php endif; ?>
 
-    <form action="paginas/procesoRegistro.php" method="POST">
+    <form action="procesoRegistro.php" method="POST">
       <div class="input-group">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>

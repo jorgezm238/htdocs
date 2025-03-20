@@ -7,7 +7,7 @@ if (!isset($_SESSION['id_usu'])) {
 
 $idUser = $_SESSION['id_usu'];
 
-include '../conexion.php';
+include 'conexion.php';
 
 $fecha = $_POST['dateInput'];
 $tipo_comida = $_POST['mealType'];
@@ -74,7 +74,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultado del Registro</title>
-    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="estilos.css">
     </head>
 <body>
     <div class="mensaje-contenedor">

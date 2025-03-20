@@ -26,7 +26,7 @@ if ($result->num_rows > 0) {
         $_SESSION['usuario'] = $userNameInput;
         $_SESSION['id_usu'] = $userData['id_usu'];
 
-        header("Location: formularios/seleccionar.php");
+        header("Location: seleccionar.php");
         exit();
     } else {
         $errorMessage = "Contraseña incorrecta.";
@@ -43,7 +43,7 @@ $connection->close();
 <head>
   <meta charset="UTF-8">
   <title>Autentificación</title>
-  <link rel="stylesheet" href="css/autentificacion.css">
+  <link rel="stylesheet" href="autentificacion.css">
 </head>
 <body>
   <?php if (isset($errorMessage)): ?>
