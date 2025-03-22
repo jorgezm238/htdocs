@@ -3,7 +3,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
-// Manejo de preflight (CORS)
+
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
@@ -12,7 +12,6 @@ require_once 'conexion.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-// Para POST, PUT y DELETE leemos el JSON del body
 if ($method !== 'GET') {
     $json = file_get_contents("php://input");
     $data = json_decode($json, true);
@@ -49,7 +48,7 @@ switch ($method) {
 
     // =========== CREAR USUARIO ===============
     case 'POST':
-        // Validamos datos requeridos
+        
         if (
             !$data || 
             !isset($data['username'], $data['password'], $data['nombre'], $data['apellidos'], $data['fechaNacimiento'])
@@ -108,7 +107,7 @@ switch ($method) {
         $fechaNacimiento = trim($data['fechaNacimiento']);
         $password        = isset($data['password']) ? $data['password'] : '';
 
-        // Si llega un password, lo actualizamos
+       
         if (!empty($password)) {
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
             $sql = "UPDATE usuario SET 
