@@ -1,0 +1,2 @@
+En proyecto react tienes que hacer el npm start
+y cambiar las rutas en la api

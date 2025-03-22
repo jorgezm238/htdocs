@@ -22,4 +22,4 @@ Route::post('/agenda/show', [AgendaController::class, 'showAgenda']);
 // http://localhost:8000/pictogramas
 // http://localhost:8000/agenda/create
 // http://localhost:8000/agenda/show
-
+//
