@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-03-2025 a las 15:47:30
+-- Tiempo de generación: 23-03-2025 a las 12:48:21
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -44,16 +44,16 @@ CREATE TABLE `comida` (
 INSERT INTO `comida` (`tipo_comida`, `gl_1h`, `gl_2h`, `raciones`, `insulina`, `fecha`, `id_usu`) VALUES
 ('', 11, 11, 11, 11, '2025-01-13', 1),
 ('', 111, 111, 111, 111, '2025-02-26', 1),
-('Cena', 5, 5, 6, 7, '2025-02-25', 1),
 ('Cena', 111, 111, 111, 111, '2025-02-26', 1),
+('Cena', 5, 5, 6, 7, '2025-05-25', 1),
 ('Comida', 11, 11, 11, 11, '2025-01-13', 1),
-('Comida', 11, 11, 11, 11, '2025-01-28', 1),
-('Comida', 5, 5, 6, 7, '2025-02-25', 1),
-('Comida', 222, 222, 222, 222, '2025-02-27', 1),
-('Desayuno', 11, 11, 11, 11, '2025-01-28', 1),
+('Comida', 11, 11, 11, 11, '2025-03-28', 1),
+('Comida', 222, 222, 222, 222, '2025-04-27', 1),
+('Comida', 5, 5, 6, 7, '2025-05-25', 1),
 ('Desayuno', 12, 12, 12, 12, '2025-02-12', 1),
 ('Desayuno', 11, 11, 11, 11, '2025-02-19', 1),
-('Desayuno', 5, 5, 6, 7, '2025-02-25', 1);
+('Desayuno', 11, 11, 11, 11, '2025-03-28', 1),
+('Desayuno', 5, 5, 6, 7, '2025-05-25', 1);
 
 -- --------------------------------------------------------
 
@@ -74,12 +74,12 @@ CREATE TABLE `control_glucosa` (
 
 INSERT INTO `control_glucosa` (`fecha`, `deporte`, `lenta`, `id_usu`) VALUES
 ('2025-01-13', 11, 11, 1),
-('2025-01-28', 11, 11, 1),
 ('2025-02-12', 12, 12, 1),
 ('2025-02-19', 11, 11, 1),
-('2025-02-25', 3, 4, 1),
 ('2025-02-26', 111, 1111, 1),
-('2025-02-27', 1111, 1111, 1);
+('2025-03-28', 11, 11, 1),
+('2025-04-27', 1111, 1111, 1),
+('2025-05-25', 3, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -101,10 +101,10 @@ CREATE TABLE `hiperglucemia` (
 --
 
 INSERT INTO `hiperglucemia` (`glucosa`, `hora`, `correccion`, `tipo_comida`, `fecha`, `id_usu`) VALUES
-(2, '03:33:00', 333, 'Cena', '2025-02-25', 1),
 (11111, '19:32:00', 113, 'Cena', '2025-02-26', 1),
-(2, '03:33:00', 333, 'Comida', '2025-02-25', 1),
-(2, '03:33:00', 333, 'Desayuno', '2025-02-25', 1);
+(2, '03:33:00', 333, 'Cena', '2025-05-25', 1),
+(2, '03:33:00', 333, 'Comida', '2025-05-25', 1),
+(2, '03:33:00', 333, 'Desayuno', '2025-05-25', 1);
 
 -- --------------------------------------------------------
 
@@ -128,10 +128,10 @@ INSERT INTO `hipoglucemia` (`glucosa`, `hora`, `tipo_comida`, `fecha`, `id_usu`)
 (11, '11:11:00', '', '2025-01-13', 1),
 (111, '11:11:00', '', '2025-02-26', 1),
 (11, '11:11:00', 'Comida', '2025-01-13', 1),
-(11, '11:11:00', 'Comida', '2025-01-28', 1),
-(222, '21:31:00', 'Comida', '2025-02-27', 1),
-(11, '11:11:00', 'Desayuno', '2025-01-28', 1),
-(12, '12:21:00', 'Desayuno', '2025-02-12', 1);
+(11, '11:11:00', 'Comida', '2025-03-28', 1),
+(222, '21:31:00', 'Comida', '2025-04-27', 1),
+(12, '12:21:00', 'Desayuno', '2025-02-12', 1),
+(11, '11:11:00', 'Desayuno', '2025-03-28', 1);
 
 -- --------------------------------------------------------
 
@@ -155,7 +155,8 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id_usu`, `fecha_nacimiento`, `nombre`, `apellidos`, `usuario`, `contra`) VALUES
 (1, '2025-02-04', 'david', 'perez', 'usu', '$2y$10$Kq4w1jT.ghjXw.DQW6vApOgQhqEm3n4k49/PLb3eNARJ7ASEH9HKi'),
 (4, '2004-01-26', 'Jorge', 'Zardain', 'jorgeeee', '$2y$10$TqpQAO7UCjBcY13bIlnVpOF0HNw1X69JZsdebuiX/eWC1d1xfFGhK'),
-(5, '2000-12-10', 'Daniel', 'Freite', 'danieeeeel', '$2y$10$wG9DByfVH5hTVrsIYusu3uNtf2I.kVVN36HHaNfvDt/M4yao8Efvq');
+(7, '2000-01-01', 'A a', 'AAAAAA', 'aaaaaaa', '$2y$10$Bsgx2rCkJoAoOE9ARSTHf.voj6Pm1GUxek3n5gKl0plUukWe0vaqi'),
+(8, '2001-03-01', 'Maria', 'Garcia Vázquez', 'mariaaaaaa', '$2y$10$Uydf3gSQmNuCmBuoU/BRP.LV1sGcqmyjYl2qOh2D3Pn2cnwxPuaZa');
 
 --
 -- Índices para tablas volcadas
@@ -201,7 +202,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_usu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas
